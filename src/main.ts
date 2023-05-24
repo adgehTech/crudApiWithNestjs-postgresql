@@ -12,7 +12,7 @@ async function bootstrap() {
   .setTitle('CRUD API')
   .setDescription('This is Crud api built for training...')
   .setVersion('1.0')
-  .addTag('CRUD')
+  .addTag('Lets Biggen...')
   .build();
 
   const document = SwaggerModule.createDocument(app, config);
