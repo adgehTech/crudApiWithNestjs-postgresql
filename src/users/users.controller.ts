@@ -3,6 +3,7 @@ import { UserService } from './users.service';
 import { User } from './user.entity';
 import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
 import { HttpExceptionFilter } from '../filters/http-exception.filter';
+import * as bcrypt from 'bcryptjs';
 
 @Controller('users')
 @ApiTags('users')
@@ -36,6 +37,8 @@ export class UserController {
   //   return this.userService.getUsers(params.name);
   // }
 
+  // const isMatch = await bcrypt.compare(password, hash)
+  
   @Get(':email')
   @ApiOkResponse({ description: 'User retrieved successfully.'})
   @ApiNotFoundResponse({ description: 'User not found.'}) 
@@ -53,6 +56,11 @@ export class UserController {
   @ApiCreatedResponse({ description: 'User created successfully'})
   @ApiUnprocessableEntityResponse({ description: 'User title already esists.'})
   async create(@Body() user: User): Promise<User> {
+    const genSalt = await bcrypt.genSalt(); 
+    const salt = 10; 
+    // const hash = await bcrypt.hash(user.password, salt)
+    const hash = await bcrypt.hash(genSalt, salt)
+    user.password = hash;
     return this.userService.create(user);
   }
 
