@@ -24,7 +24,7 @@
 
 ## Description
 
-RESTful api whith [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+RESTful api whith [Nest](https://docs.nestjs.com/) framework TypeScript starter repository.
 
 ## Installation
 
