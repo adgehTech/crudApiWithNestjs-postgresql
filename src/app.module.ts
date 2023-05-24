@@ -5,13 +5,13 @@ import { UsersModule } from './users/users.module';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 const { DB_TYPE, DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DATABASE } = process.env;
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    UsersModule,
     TypeOrmModule.forRoot({ 
       type: DB_TYPE as any || 'postgres',
       host: DB_HOST || 'localhost',
@@ -21,7 +21,9 @@ const { DB_TYPE, DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DATABASE } = proces
       database: DATABASE || 'postgres',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-    }),  
+    }),
+    UsersModule,
+    AuthModule,  
   ],
   controllers: [AppController],
   providers: [AppService],
