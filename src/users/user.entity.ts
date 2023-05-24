@@ -26,7 +26,6 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, } from 'typeo
         @CreateDateColumn()
         @ApiProperty({ type: String, format: 'date-time' })
         date: Date;
-        
 
 // @CreateDateColumn({ name: 'created_at'})
 // createdAt: Date;

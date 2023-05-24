@@ -38,7 +38,8 @@ export class UserController {
   // }
 
   // const isMatch = await bcrypt.compare(password, hash)
-  
+
+  // get user by email 
   @Get(':email')
   @ApiOkResponse({ description: 'User retrieved successfully.'})
   @ApiNotFoundResponse({ description: 'User not found.'}) 

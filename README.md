@@ -23,8 +23,7 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
-
-RESTful api whith [Nest](https://docs.nestjs.com/) framework TypeScript starter repository.
+RESTful api with [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
 
