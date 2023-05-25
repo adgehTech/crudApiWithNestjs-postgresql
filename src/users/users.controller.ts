@@ -57,10 +57,13 @@ export class UserController {
   @ApiCreatedResponse({ description: 'User created successfully'})
   @ApiUnprocessableEntityResponse({ description: 'User title already esists.'})
   async create(@Body() user: User): Promise<User> {
-    const genSalt = await bcrypt.genSalt(); 
-    const salt = 10; 
-    // const hash = await bcrypt.hash(user.password, salt)
-    const hash = await bcrypt.hash(genSalt, salt)
+    if(user.password===undefined){
+      const genSalt = await bcrypt.genSalt(); 
+      console.log(genSalt);
+      user.password = genSalt;
+    }
+    const salt = 10;  
+    const hash = await bcrypt.hash(user.password, salt)
     user.password = hash;
     return this.userService.create(user);
   }
