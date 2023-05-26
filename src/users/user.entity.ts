@@ -1,5 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, } from 'typeorm';
+import { IsEmail, MinLength, IsAlpha,  } from 'class-validator';
 @Entity()
     export class User{
         @PrimaryGeneratedColumn()
@@ -8,14 +9,17 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, } from 'typeo
         
         @Column()
         @ApiProperty({ type: String })
+        @IsAlpha()
         name: string;
 
         @Column()
         @ApiProperty({ type: String })
+        @IsEmail()
         email: string;
 
         @Column()
         @ApiProperty({ type: String })
+        @MinLength(4)
         password: string;
         
         @Column()
@@ -27,6 +31,8 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, } from 'typeo
         @ApiProperty({ type: String, format: 'date-time' })
         date: Date;
 
+// resereved tags for later use
+
 // @CreateDateColumn({ name: 'created_at'})
 // createdAt: Date;
 
@@ -35,4 +41,5 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, } from 'typeo
 
 // @DeleteDateColumn({ name: 'deleted_at' })
 // deletedAt: Date;
+
     } 

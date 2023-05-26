@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException, Query, UseFilters } from '@nestjs/common';
 import { UserService } from './users.service';
 import { User } from './user.entity';
-import { ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiTags, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiHeader, ApiNotFoundResponse, ApiOkResponse, ApiSecurity, ApiTags, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
 import { HttpExceptionFilter } from '../filters/http-exception.filter';
 import * as bcrypt from 'bcryptjs';
 
@@ -10,9 +10,9 @@ import * as bcrypt from 'bcryptjs';
 @UseFilters(new HttpExceptionFilter())
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
+  
   //get all users
-  @Get()
+  @Get() 
   @ApiOkResponse({ description: 'Users retrieved successfully.'})
   // @ApiNotFoundResponse({ description: 'User not found.'})
   async findAll(): Promise<User[]> {
@@ -31,14 +31,7 @@ export class UserController {
       return user;
     }
   }
-
-  // @Get()
-  // getUsers(@Query() params: any): Promise<User[]> {
-  //   return this.userService.getUsers(params.name);
-  // }
-
-  // const isMatch = await bcrypt.compare(password, hash)
-
+  
   // get user by email 
   @Get(':email')
   @ApiOkResponse({ description: 'User retrieved successfully.'})
