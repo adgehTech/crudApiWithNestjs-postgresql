@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, } from 'typeorm';
-import { IsEmail, MinLength, IsAlpha,  } from 'class-validator';
+import { IsEmail, MinLength, IsAlpha, IsStrongPassword,  } from 'class-validator';
 @Entity()
     export class User{
         @PrimaryGeneratedColumn()
@@ -20,6 +20,7 @@ import { IsEmail, MinLength, IsAlpha,  } from 'class-validator';
         @Column()
         @ApiProperty({ type: String })
         @MinLength(4)
+        // @IsStrongPassword()
         password: string;
         
         @Column()

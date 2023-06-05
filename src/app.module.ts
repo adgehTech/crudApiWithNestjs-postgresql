@@ -6,24 +6,16 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-
-const { DB_TYPE, DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DATABASE } = process.env;
+import { User } from './users/user.entity';
+import databaseConfig from './config/database.config'
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({ 
-      type: DB_TYPE as any || 'postgres',
-      host: DB_HOST || 'localhost',
-      port: parseInt(DB_PORT) || 5432,
-      username: DB_USERNAME || 'postgres',
-      password: DB_PASSWORD || 'root',
-      database: DATABASE || 'postgres',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(databaseConfig), 
     UsersModule,
-    AuthModule,  
+    AuthModule, 
+    User  
   ],
   controllers: [AppController],
   providers: [AppService],
